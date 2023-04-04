@@ -5,25 +5,20 @@ import axios from 'axios';
 
 function App() {
 
-  useEffect(() => {
-    axios.get('/api/hi')
-      .then(response => {
-        console.log('response', response)
-      })
-  }, []);
+  const [lists, setLists] = useState([]);
+  const [value, setValue] = useState("");
 
   useEffect(() => {
-    //여기서 데이터베이스에 있는 값을 가져온다.
-    axios.get('/api/values')
+    // '/api/values' 대신에 'http://localhost:5000/api/values'로 변경
+    axios.get('http://localhost:5000/api/values')
       .then(response => {
         console.log('response', response)
         setLists(response.data)
       })
+      .catch(error => {
+        console.log('error', error)
+      })
   }, []);
-
-
-  const [lists, setLists] = useState([]);
-  const [value, setValue] = useState("");
 
 
   const changeHandler = (event) => {
@@ -33,7 +28,7 @@ function App() {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    axios.post('/api/value', { value: value })
+    axios.post('http://localhost:5000/api/value', { value: value })
       .then(response => {
         if (response.data.success) {
           console.log('response', response);
@@ -43,8 +38,10 @@ function App() {
           alert('값을 DB에 넣는데 실패했습니다.');
         }
       })
+      .catch(error => {
+        console.log('error', error)
+      })
   }
-
 
   return (
     <div className="App">
