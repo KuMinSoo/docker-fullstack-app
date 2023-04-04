@@ -18,7 +18,7 @@ function App() {
       .then(response => {
         console.log('response', response)
         setLists(response.data)
-      });
+      })
   }, []);
 
 
