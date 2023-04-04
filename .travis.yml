@@ -8,6 +8,7 @@ services:
 before_install:
   - docker build -t kuminsu/react-test-app -f ./frontend/Dockerfile.dev ./frontend
 
+
 script:
   - docker run -e CI=true kuminsu/react-test-app npm run test
 
