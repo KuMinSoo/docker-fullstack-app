@@ -10,7 +10,7 @@ function App() {
       .then(response => {
         console.log('response', response)
       })
-  }, [])
+  }, []);
 
   useEffect(() => {
     //여기서 데이터베이스에 있는 값을 가져온다.
@@ -18,12 +18,12 @@ function App() {
       .then(response => {
         console.log('response', response)
         setLists(response.data)
-      })
-  }, [])
+      });
+  }, []);
 
 
-  const [lists, setLists] = useState([])
-  const [value, setValue] = useState("")
+  const [lists, setLists] = useState([]);
+  const [value, setValue] = useState("");
 
 
   const changeHandler = (event) => {
@@ -36,11 +36,11 @@ function App() {
     axios.post('/api/value', { value: value })
       .then(response => {
         if (response.data.success) {
-          console.log('response', response)
-          setLists([...lists, response.data])
+          console.log('response', response);
+          setLists([...lists, response.data]);
           setValue("");
         } else {
-          alert('값을 DB에 넣는데 실패했습니다.')
+          alert('값을 DB에 넣는데 실패했습니다.');
         }
       })
   }
